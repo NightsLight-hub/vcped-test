@@ -1,18 +1,26 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <span>{{ msg }}</span>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
+  data () {
+    return {
+      msg: ''
+    };
+  },
+  mounted () {
+    // eslint-disable-next-line no-debugger
+    debugger;
+    window.ipcRenderer.receive('mainMsg', (event, ...args) => {
+      console.log('get mainMsg');
+      this.msg = args[0];
+    });
   }
-}
+};
 </script>
